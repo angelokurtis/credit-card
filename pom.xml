@@ -21,6 +21,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <docker-plugin.version>3.5.41</docker-plugin.version>
 		<java.version>1.8</java.version>
 		<kotlin.version>1.2.60</kotlin.version>
 	</properties>
@@ -64,6 +65,58 @@
 		<testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
 		<plugins>
 			<plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>fabric8-maven-plugin</artifactId>
+                <version>${docker-plugin.version}</version>
+                <configuration>
+                    <resources>
+                        <labels>
+                            <deployment>
+                                <property>
+                                    <name>version</name>
+                                    <value>${project.version}</value>
+                                </property>
+                                <property>
+                                    <name>expose</name>
+                                    <value>false</value>
+                                </property>
+                            </deployment>
+                        </labels>
+                    </resources>
+                    <images>
+                        <image>
+                            <name>kurtis/${project.artifactId}</name>
+                            <build>
+                                <from>openjdk:8-jre-alpine3.7</from>
+                                <entryPoint>java -jar /app/${project.build.finalName}.jar</entryPoint>
+                                <assembly>
+                                    <basedir>/app</basedir>
+                                    <descriptorRef>artifact</descriptorRef>
+                                    <inline>
+                                        <id>assembly</id>
+                                        <files>
+                                            <file>
+                                                <source>target/${project.build.finalName}.jar</source>
+                                            </file>
+                                        </files>
+                                    </inline>
+                                </assembly>
+                                <tags>
+                                    <tag>${project.version}</tag>
+                                </tags>
+                                <ports>
+                                    <port>8080</port>
+                                </ports>
+                            </build>
+                            <run>
+                                <namingStrategy>alias</namingStrategy>
+                            </run>
+                            <alias>${project.build.finalName}</alias>
+                        </image>
+                    </images>
+                </configuration>
+            </plugin>
+            <plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
