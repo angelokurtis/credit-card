@@ -1,7 +1,7 @@
-package com.sensedia.creditcard.domain.service
+package com.sensedia.domain.creditcard.service
 
-import com.sensedia.creditcard.domain.CreditCard
-import com.sensedia.creditcard.domain.repository.CreditCardRepository
+import com.sensedia.domain.creditcard.CreditCard
+import com.sensedia.domain.creditcard.repository.CreditCardRepository
 import org.springframework.stereotype.Service
 
 @Service

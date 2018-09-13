@@ -1,7 +1,7 @@
-package com.sensedia.creditcard.domain.handler
+package com.sensedia.domain.creditcard.handler
 
-import com.sensedia.creditcard.domain.CreditCard
-import com.sensedia.creditcard.domain.service.CreditCardService
+import com.sensedia.domain.creditcard.CreditCard
+import com.sensedia.domain.creditcard.service.CreditCardService
 import org.springframework.http.MediaType.APPLICATION_JSON
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.server.ServerRequest

@@ -1,6 +1,6 @@
-package com.sensedia.creditcard.infra
+package com.sensedia.infra
 
-import com.sensedia.creditcard.domain.handler.CreditCardHandler
+import com.sensedia.domain.creditcard.handler.CreditCardHandler
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration

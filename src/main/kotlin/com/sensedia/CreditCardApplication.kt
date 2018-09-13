@@ -1,4 +1,4 @@
-package com.sensedia.creditcard
+package com.sensedia
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

@@ -1,6 +1,6 @@
-package com.sensedia.creditcard.domain.repository
+package com.sensedia.domain.creditcard.repository
 
-import com.sensedia.creditcard.domain.CreditCard
+import com.sensedia.domain.creditcard.CreditCard
 import org.springframework.data.repository.reactive.ReactiveCrudRepository
 
 interface CreditCardRepository : ReactiveCrudRepository<CreditCard, String>
