@@ -13,15 +13,15 @@ import org.springframework.web.reactive.function.server.RouterFunctions.route
 @ComponentScan(basePackageClasses = [CreditCardHandler::class])
 class RouteConfiguration {
 
-    @Bean
-    fun routes(handler: CreditCardHandler) = route(
-                    GET("/api/v1/credit-card"),
-                    HandlerFunction { handler.all(it) })
-            .andRoute(
-                    POST("/api/v1/credit-card"),
-                    HandlerFunction { handler.create(it) })
-            .andRoute(
-                    GET("/api/v1/credit-card/{creditCardId}"),
-                    HandlerFunction { handler.findById(it) })
+  @Bean
+  fun routes(handler: CreditCardHandler) = route(
+          GET("/api/v1/credit-card"),
+          HandlerFunction { handler.all(it) })
+      .andRoute(
+          POST("/api/v1/credit-card"),
+          HandlerFunction { handler.create(it) })
+      .andRoute(
+          GET("/api/v1/credit-card/{creditCardId}"),
+          HandlerFunction { handler.findById(it) })
 
 }

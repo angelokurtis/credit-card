@@ -15,35 +15,35 @@ import reactor.core.publisher.Mono
 @Component
 class CreditCardHandler(private val service: CreditCardService) {
 
-    fun all(request: ServerRequest): Mono<ServerResponse> {
-        val cards = this.service.fetchAll()
-        return ServerResponse.ok()
-                .contentType(APPLICATION_JSON)
-                .body<CreditCard, Flux<CreditCard>>(cards, CreditCard::class.java)
-    }
+  fun all(request: ServerRequest): Mono<ServerResponse> {
+    val cards = this.service.fetchAll()
+    return ServerResponse.ok()
+        .contentType(APPLICATION_JSON)
+        .body<CreditCard, Flux<CreditCard>>(cards, CreditCard::class.java)
+  }
 
-    fun create(request: ServerRequest): Mono<ServerResponse> {
-        val creditCard = request
-                .bodyToMono(CreditCard::class.java)
-                .flatMap<CreditCard> { this.service.create(it) }
-        return creditCard
-                .flatMap {
-                    created(fromPath("/" + it.id).build().toUri())
-                            .contentType(APPLICATION_JSON)
-                            .syncBody(it)
-                }
-    }
+  fun create(request: ServerRequest): Mono<ServerResponse> {
+    val creditCard = request
+        .bodyToMono(CreditCard::class.java)
+        .flatMap<CreditCard> { this.service.create(it) }
+    return creditCard
+        .flatMap {
+          created(fromPath("/" + it.id).build().toUri())
+              .contentType(APPLICATION_JSON)
+              .syncBody(it)
+        }
+  }
 
-    fun findById(request: ServerRequest): Mono<ServerResponse> {
-        val creditCard = Mono
-                .just(request.pathVariable("creditCardId"))
-                .flatMap<CreditCard> { service.fetchById(it) }
-        return creditCard
-                .flatMap {
-                    ServerResponse.ok()
-                            .contentType(APPLICATION_JSON)
-                            .body(creditCard, CreditCard::class.java)
-                }
-                .switchIfEmpty(notFound().build())
-    }
+  fun findById(request: ServerRequest): Mono<ServerResponse> {
+    val creditCard = Mono
+        .just(request.pathVariable("creditCardId"))
+        .flatMap<CreditCard> { service.fetchById(it) }
+    return creditCard
+        .flatMap {
+          ServerResponse.ok()
+              .contentType(APPLICATION_JSON)
+              .body(creditCard, CreditCard::class.java)
+        }
+        .switchIfEmpty(notFound().build())
+  }
 }

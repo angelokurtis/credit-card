@@ -9,5 +9,5 @@ import org.springframework.web.reactive.config.EnableWebFlux
 class CreditCardApplication
 
 fun main(args: Array<String>) {
-    runApplication<CreditCardApplication>(*args)
+  runApplication<CreditCardApplication>(*args)
 }
