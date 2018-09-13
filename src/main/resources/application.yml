@@ -1,0 +1,12 @@
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+
+cashback:
+  topic: cashback-topic
+
+logging:
+  level:
+    root: INFO
+    org.springframework: WARN
+    com.sensedia: DEBUG
